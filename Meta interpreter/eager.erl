@@ -33,14 +33,13 @@ eval_match({var, Id}, V, Env) ->
 		{Id, _} ->
 			fail % Var name already bound.
 	end;
-
-%eval_match({cons, ..., ...}, ..., Env)  ->
-%	case eval_match(..., ..., ...) of
-%		fail ->
-%			fail;
-%		{ok, ...} ->
-%			eval_match(..., ..., ...)
-%	end;
+eval_match({cons, H, T}, [A | B], Env)  ->
+	case eval_match(H, A, Env) of % Match head first.
+		fail ->
+			fail;
+		{ok, EnvNew} ->
+			eval_match(T, B, EnvNew) % Match tail last.
+	end;
 eval_match(_, _, _) ->
 	fail.
 
