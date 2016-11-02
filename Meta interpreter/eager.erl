@@ -20,3 +20,37 @@ eval_expr({cons, {var, H}, {atm, T}}, Env) ->
 			{ok, {V, T}}
 	end.
 
+eval_match(ingore, _, Env) ->
+	{ok, Env};
+eval_match({atm, Id}, Id, Env) ->
+	{ok, Env};
+eval_match({var, Id}, V, Env) ->
+	case env:lookup(Id, Env) of
+		false ->
+			{ok, env:add(Id, V, Env)}; % Add if not in environment.
+		{Id, V} ->
+			{ok, Env}; % Simply return if found in environment.
+		{Id, _} ->
+			fail % Var name already bound.
+	end;
+
+%eval_match({cons, ..., ...}, ..., Env)  ->
+%	case eval_match(..., ..., ...) of
+%		fail ->
+%			fail;
+%		{ok, ...} ->
+%			eval_match(..., ..., ...)
+%	end;
+eval_match(_, _, _) ->
+	fail.
+
+
+
+
+
+
+
+
+
+
+
