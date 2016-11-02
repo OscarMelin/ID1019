@@ -2,7 +2,8 @@
 -export([eval_expr/2, eval_match/3]).
 
 
-%% Returns either {ok, S} where S is a data structure, or error.
+%% Evaluetes expression and returns either {ok, S}
+%% where S is a data structure, or error.
 eval_expr({atm, Id}, _) ->
 	{ok, Id};
 eval_expr({var, Id}, Env) ->
@@ -20,6 +21,8 @@ eval_expr({cons, {var, H}, {atm, T}}, Env) ->
 			{ok, {V, T}}
 	end.
 
+%% Matches and returns either {ok, Env}, where Env is
+%% an extended environment, or the atom fail.
 eval_match(ingore, _, Env) ->
 	{ok, Env};
 eval_match({atm, Id}, Id, Env) ->
