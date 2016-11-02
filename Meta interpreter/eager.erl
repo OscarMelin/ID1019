@@ -1,5 +1,5 @@
 -module(eager).
--export([eval_expr/2]).
+-export([eval_expr/2, eval_match/3]).
 
 
 %% Returns either {ok, S} where S is a data structure, or error.
