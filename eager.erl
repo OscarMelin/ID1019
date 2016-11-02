@@ -1,6 +1,8 @@
 -module(eager).
 -export([eval_expr/2]).
 
+
+%% Returns either {ok, S} where S is a data structure, or error.
 eval_expr({atm, Id}, _) ->
 	{ok, Id};
 eval_expr({var, Id}, Env) ->
@@ -15,10 +17,6 @@ eval_expr({cons, {var, H}, {atm, T}}, Env) ->
 		error ->
 			error;
 		{ok, V} ->
-			case eval_expr({atm, T}, Env) of %Not needed? Cant return error.
-				error ->
-					error;
-				{ok, T} ->
-					{ok, {V, T}}
-			end
+			{ok, {V, T}}
 	end.
+
