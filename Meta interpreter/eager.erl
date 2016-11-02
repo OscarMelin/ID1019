@@ -1,5 +1,5 @@
 -module(eager).
--export([eval_expr/2, eval_match/3]).
+-export([eval_expr/2, eval_match/3, eval_seq/2]).
 
 
 %% Evaluetes expression and returns either {ok, S}
@@ -46,11 +46,22 @@ eval_match({cons, H, T}, [A | B], Env)  ->
 eval_match(_, _, _) ->
 	fail.
 
-
-
-
-
-
+%%
+%%
+eval_seq([Exp], Env) ->
+	...;
+eval_seq([{match, Ptr, Exp} | Seq], Env) ->
+	case ... of ->
+		error ->
+			...;
+		{ok, Str} ->
+			case ... of
+				fail ->
+					error;
+				{ok, ...} ->
+					...
+			end
+	end.
 
 
 
