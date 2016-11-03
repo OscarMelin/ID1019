@@ -1,5 +1,5 @@
 -module(eager).
--export([eval_expr/2, eval_match/3, eval_seq/2]).
+-export([eval_expr/2, eval_match/3, eval/1]).
 
 
 %% Evaluetes expression and returns either {ok, S}
@@ -49,21 +49,24 @@ eval_match(_, _, _) ->
 %%
 %%
 eval_seq([Exp], Env) ->
-	...;
+	io:format("numbah 1~n"),
+	eval_expr(Exp, Env);
 eval_seq([{match, Ptr, Exp} | Seq], Env) ->
-	case ... of ->
+	io:format("numbah 2~n"),
+	case eval_expr(Exp, Env) of
 		error ->
-			...;
+			error;
 		{ok, Str} ->
-			case ... of
+			case eval_match(Ptr, Str, Env) of
 				fail ->
 					error;
-				{ok, ...} ->
-					...
+				{ok, EnvNew} ->
+					eval_seq(Seq, EnvNew)
 			end
 	end.
 
-
+eval(Seq) ->
+	eval_seq(Seq, env:new()).
 
 
 
