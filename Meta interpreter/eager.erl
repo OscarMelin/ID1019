@@ -23,7 +23,7 @@ eval_expr({cons, {var, H}, {atm, T}}, Env) ->
 
 %% Matches and returns either {ok, Env}, where Env is
 %% an extended environment, or the atom fail.
-eval_match(ingore, _, Env) ->
+eval_match(ignore, _, Env) ->
 	{ok, Env};
 eval_match({atm, Id}, Id, Env) ->
 	{ok, Env};
@@ -37,12 +37,10 @@ eval_match({var, Id}, V, Env) ->
 			fail % Var name already bound.
 	end;
 eval_match({cons, H, T}, {A , B}, Env)  ->
-	io:format("in eval_match cons~n"),
 	case eval_match(H, A, Env) of % Match head first.
 		fail ->
 			fail;
 		{ok, EnvNew} ->
-			io:format("in eval_match cons~n"),
 			eval_match(T, B, EnvNew) % Match tail last.
 	end;
 eval_match(_, _, _) ->
@@ -51,18 +49,15 @@ eval_match(_, _, _) ->
 %%
 %%
 eval_seq([Exp], Env) ->
-	io:format("numbah 1~n"),
 	eval_expr(Exp, Env);
 eval_seq([{match, Ptr, Exp} | Seq], Env) ->
-	io:format("numbah 2~n"),
 	case eval_expr(Exp, Env) of
 		error ->
-			error1;
+			error;
 		{ok, Str} ->
 			case eval_match(Ptr, Str, Env) of
 				fail ->
-					io:format("error2: (~p, ~p, ~p)~n", [Ptr, Str, Env]),
-					error2;
+					error;
 				{ok, EnvNew} ->
 					eval_seq(Seq, EnvNew)
 			end
