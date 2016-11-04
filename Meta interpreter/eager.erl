@@ -76,7 +76,16 @@ eval_seq([{match, Ptr, Exp} | Seq], Env) ->
 				{ok, EnvNew} ->
 					eval_seq(Seq, EnvNew)
 			end
+	end;
+eval_seq([{switch, Exp, Statements} | Seq], Env) ->
+	case eval_expr({switch, Exp, Statements}, Env) of
+		error ->
+			error;
+		{ok, _} ->
+			hej
 	end.
+
+
 
 eval(Seq) ->
 	eval_seq(Seq, env:new()).
