@@ -82,13 +82,18 @@ eval_seq({switch, _, []}, _) -> % No matches -> error.
 eval_seq([{switch, Exp, [{statement, Ptr, Body} | R]} | Seq], Env) ->
 	case eval_expr(Exp, Env) of
 		error ->
-			error
-		{ok, Str} ->
-			case eval_match(Ptr, Str, Env) of
+			error;
+		{ok, _} ->
+			io:format("~n~p   ~p~n", [Ptr, Body]),
+			case eval_match(Exp, Ptr, Env) of
 				fail ->
+					io:format("No match!~n"),
+					io:format("Exp: ~p, Ptr: ~p, Env: ~p~n~n", [Exp, Ptr, Env]),
 					eval_seq([{switch, Exp, R} | Seq], Env);
-				(ok, _) ->
-					eval_seq([body] ++ Seq)
+				{ok, _} ->
+					io:format("Match found!~n"),
+					io:format("eval_seq([~p] ++ ~p, ~p)~n~n", [Body, Seq, Env]),
+					eval_seq([Body] ++ Seq, Env)
 			end		
 	end.
 
