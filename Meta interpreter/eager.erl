@@ -19,21 +19,7 @@ eval_expr({cons, {var, H}, {atm, T}}, Env) ->
 			error;
 		{ok, V} ->
 			{ok, {V, T}}
-		end;
-eval_expr({switch, _, []}, _) -> % No matches -> error.
-	error;
-eval_expr({switch, Exp, [{statement, Ptr, Seq} | R]}, Env) -> % Case handler.
-	case eval_expr(Exp, Env) of % Check if valid expression.
-		error ->
-			error;
-		{ok, _} ->
-			case eval_match(Exp, Ptr, Env) of
-				fail ->
-					eval_expr({switch, Exp, R}, Env);
-				{ok, _} ->
-					eval_seq(Seq, Env)
-			end
-	end.		
+	end.
 
 
 %% Matches and returns either {ok, Env}, where Env is
