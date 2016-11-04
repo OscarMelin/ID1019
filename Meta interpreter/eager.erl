@@ -63,7 +63,7 @@ eval_seq([{match, Ptr, Exp} | Seq], Env) ->
 					eval_seq(Seq, EnvNew)
 			end
 	end;
-eval_seq({switch, _, []}, _) -> % No matches -> error.
+eval_seq([{switch, _, []}, _], _) -> % No matches -> error.
         error;
 eval_seq([{switch, Exp, [{statement, Ptr, Body} | R]} | Seq], Env) ->
 	case eval_expr(Exp, Env) of
