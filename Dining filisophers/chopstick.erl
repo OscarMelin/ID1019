@@ -1,18 +1,21 @@
+-module(chopstick).
+-export([start/0]).
+
 start() ->
-    spawn_link(fun() -> ... end).
+    spawn_link(fun() -> availiable() end).
 
 availiable() ->
-    recieve
-        ... ->
-            :
+    receive
+        {request, Pid} ->
+            gone();
         quit ->
             ok
     end.
 
 gone() ->
-    recieve
-        ... ->
-            :
+    receive
+        return ->
+            availiable();
         quit ->
-            ok
+            okd
     end.
