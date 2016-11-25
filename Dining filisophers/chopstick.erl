@@ -7,6 +7,7 @@ start() ->
 availiable() ->
     receive
         {request, Pid} ->
+            Pid ! ok,
             gone();
         quit ->
             ok
@@ -19,3 +20,16 @@ gone() ->
         quit ->
             okd
     end.
+
+request(Stick) ->
+    Stick ! {request, self()},
+        receive
+            ok ->
+                ok
+        end.
+
+return(Stick) ->
+    Stick ! return.
+
+terminate(Stick) -> 
+    Stick ! quit.
