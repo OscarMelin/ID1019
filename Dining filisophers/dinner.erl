@@ -1,5 +1,5 @@
 -module (dinner).
--export ([function/arity]).
+-export ([start/0]).
 
 start() ->
 	spawn(fun() -> init() end).
