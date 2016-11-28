@@ -18,7 +18,8 @@ init() ->
 	wait(5, [C1, C2, C3, C4, C5]).
 
 wait(0, Chopsticks) ->
-	lists:foreach(fun(C) -> chopstick:terminate(C) end, Chopsticks);
+	lists:foreach(fun(C) -> chopstick:terminate(C) end, Chopsticks),
+	io:format("~nAll done!~n");
 wait(N, Chopsticks) ->
 	receive
 		done ->

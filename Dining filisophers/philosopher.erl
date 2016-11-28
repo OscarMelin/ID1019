@@ -17,7 +17,7 @@ eat(Hungry, Right, Left, Name, Ctrl) ->
 	case {L, R} of
 		{ok, ok} ->
 			io:format("~s received chopsticks~n", [Name]),
-			sleep(100, 500),
+			%sleep(100, 500),
 			chopstick:return(Left),
 			chopstick:return(Right)
 	end,

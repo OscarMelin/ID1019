@@ -8,7 +8,6 @@ start() ->
 availiable() ->
     receive
         {request, Pid} ->
-            io:format("chopstick request recieved!~n"),
             Pid ! ok,
             gone();
         quit ->
@@ -18,22 +17,20 @@ availiable() ->
 gone() ->
     receive
         return ->
-            availiable(),
-            io:format("chopstick availiable!~n");
+            io:format("chopstick returned!~n"),
+            availiable();
         quit ->
             ok
     end.
 
 request(Stick) ->
     Stick ! {request, self()},
-    io:format("chopstick requested!~n"),
     receive
         ok ->
             ok
     end.
 
 return(Stick) ->
-    io:format("returning chopstick!~n"),
     Stick ! return.
 
 terminate(Stick) -> 
