@@ -1,7 +1,8 @@
 -module(chopstick).
--export([start/0]).
+-export([start/0, request/1]).
 
 start() ->
+    io:format("chopstick spawned!~n"),
     spawn_link(fun() -> availiable() end).
 
 availiable() ->
@@ -18,15 +19,16 @@ gone() ->
         return ->
             availiable();
         quit ->
-            okd
+            ok
     end.
 
 request(Stick) ->
     Stick ! {request, self()},
-        receive
-            ok ->
-                ok
-        end.
+    io:format("chopstick requested!~n"),
+    receive
+        ok ->
+            ok
+    end.
 
 return(Stick) ->
     Stick ! return.

@@ -11,10 +11,10 @@ init() ->
 	C5 = chopstick:start(),
 	Ctrl = self(),
 	philosopher:start(5, C1, C2, "Arendt", Ctrl),
-	philosopher:start(5, C2, C3, "Hypatia", Ctrl),
-	philosopher:start(5, C3, C4, "Simone", Ctrl),
-	philosopher:start(5, C4, C5, "Elizabeth", Ctrl),
-	philosopher:start(5, C5, C1, "Ayn", Ctrl),
+	%philosopher:start(5, C2, C3, "Hypatia", Ctrl),
+	%philosopher:start(5, C3, C4, "Simone", Ctrl),
+	%philosopher:start(5, C4, C5, "Elizabeth", Ctrl),
+	%philosopher:start(5, C5, C1, "Ayn", Ctrl),
 	wait(5, [C1, C2, C3, C4, C5]).
 
 wait(0, Chopsticks) ->
