@@ -8,6 +8,7 @@ start() ->
 availiable() ->
     receive
         {request, Pid} ->
+            io:format("chopstick request recieved!~n"),
             Pid ! ok,
             gone();
         quit ->
@@ -27,7 +28,7 @@ request(Stick) ->
     io:format("chopstick requested!~n"),
     receive
         ok ->
-            ok
+            io:format("chopstick granted!~n")
     end.
 
 return(Stick) ->
