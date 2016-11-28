@@ -11,8 +11,14 @@ start(Hungry, Right, Left, Name, Ctrl) ->
 eat(0, _, _, _, Ctrl) ->
 	Ctrl ! done;
 eat(Hungry, Right, Left, Name, Ctrl) ->
-	chopstick:request(Left),
-	receive
-		ok ->
-			io:format("~s received a chopstick~n", [Name])
-	end.
+
+	L = chopstick:request(Left),
+	R = chopstick:request(Right),
+	case {L, R} of
+		{ok, ok} ->
+			io:format("~s received chopsticks~n", [Name]),
+			sleep(100, 500),
+			chopstick:return(Left),
+			chopstick:return(Right)
+	end,
+	eat(Hungry - 1, Right, Left, Name, Ctrl).
