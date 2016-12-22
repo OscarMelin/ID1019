@@ -1,0 +1,9 @@
+Experiment with the dinner, will the philosophers always be able to eat?
+
+ It seems so, although with varying time delay between when eating and sleeping. 
+
+What happens if you decrease the time it dreams?
+
+
+
+What happens if youn introduce an artificial delay between the receiving of the first chopstick and requesting the second?
