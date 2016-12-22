@@ -17,7 +17,6 @@ availiable() ->
 gone() ->
     receive
         return ->
-            io:format("chopstick returned!~n"),
             availiable();
         quit ->
             ok
