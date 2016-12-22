@@ -12,7 +12,11 @@ eat(0, _, _, _, Ctrl) ->
 	Ctrl ! done;
 eat(Hungry, Right, Left, Name, Ctrl) ->
 
-	{L, R} = {chopstick:request(Left), chopstick:request(Right)},
+	%{L, R} = {chopstick:request(Left), chopstick:request(Right)},
+
+	L = chopstick:request(Left),
+	sleep(100, 500),
+	R = chopstick:request(Right),
 
 	case {L, R} of
 		{ok, ok} ->
