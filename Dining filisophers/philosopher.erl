@@ -14,16 +14,23 @@ eat(Hungry, Right, Left, Name, Ctrl) ->
 
 	%{L, R} = {chopstick:request(Left), chopstick:request(Right)},
 
-	L = chopstick:request(Left),
-	sleep(100, 500),
-	R = chopstick:request(Right),
+	L = chopstick:request(Left, 100),
+	sleep(10, 20),
+	R = chopstick:request(Right, 100),
 
 	case {L, R} of
 		{ok, ok} ->
+			Remaining = Hungry - 1,
 			io:format("~s received two chopsticks~n", [Name]),
 			sleep(100, 500),
 			chopstick:return(Left),
 			chopstick:return(Right),
-			io:format("~s done~n", [Name])
-	end,
-	eat(Hungry - 1, Right, Left, Name, Ctrl).
+			io:fwrite("~s done, ~w remaining~n", [Name, Remaining]),
+			eat(Remaining, Right, Left, Name, Ctrl);
+		{no, _} ->
+			chopstick:return(Left),
+			eat(Hungry, Right, Left, Name, Ctrl);
+		{_, no} ->
+			chopstick:return(Right),
+			eat(Hungry, Right, Left, Name, Ctrl)
+	end.
