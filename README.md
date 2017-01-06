@@ -1,15 +1,15 @@
 # ID1019
 5 labs for Programming II
 
-Huffman coding
+##Huffman coding
 
-Meta interpreter
+##Meta interpreter
 
-Dining filisophers
+##Dining filisophers
 
-Mandelbrot
+##Mandelbrot
 
-Web server
+##Web server
 
 
 
