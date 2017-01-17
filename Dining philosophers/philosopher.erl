@@ -1,11 +1,16 @@
 -module(philosopher).
 -export([start/5]).
+-import(erlang).
 
 sleep(T,D) ->
 	timer:sleep(T + random:uniform(D)).
 
 start(Hungry, Right, Left, Name, Ctrl) ->
-	spawn_link(fun() -> eat(Hungry, Right, Left, Name, Ctrl) end),
+
+	{A, B, C} = now(),
+	spawn_link(fun() ->
+	random:seed(A, B, C),
+	eat(Hungry, Right, Left, Name, Ctrl) end),
 	io:format("~s spawned!~n", [Name]).
 
 eat(0, _, _, _, Ctrl) ->
@@ -27,14 +32,10 @@ eat(Hungry, Right, Left, Name, Ctrl) ->
 			chopstick:return(Right),
 			io:fwrite("~s done, ~w remaining~n", [Name, Remaining]),
 			eat(Remaining, Right, Left, Name, Ctrl);
-		{no, _} ->
+		{_, _} ->
 			chopstick:return(Left),
 			io:fwrite("~s dropped left~n", [Name]),
-			sleep(10, 20),
-			eat(Hungry, Right, Left, Name, Ctrl);
-		{_, no} ->
 			chopstick:return(Right),
 			io:fwrite("~s dropped right~n", [Name]),
-			sleep(10, 20),
 			eat(Hungry, Right, Left, Name, Ctrl)
 	end.

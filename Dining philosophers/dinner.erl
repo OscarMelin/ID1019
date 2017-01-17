@@ -3,6 +3,7 @@
 
 start() ->
 	spawn(fun() -> init() end).
+
 init() ->
 	C1 = chopstick:start(),
 	C2 = chopstick:start(),
