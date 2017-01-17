@@ -47,6 +47,15 @@ With the newly added timeout in the chopstick module that we still get stuck in 
 3 Simone dropped right
 5 Ayn dropped right
 
+using now() to generate unique seed values for each process, now() is deprecated but school uses old erlang version? works for our implementation.
+Now it works!
+
+##4.2 asynchronous requests
+
+###If a philosopher gives up, how do we keep track of which chopsticks that
+was actually obtained?
+
+###Is this a tricky problem or a non-problem?
 
 
 
