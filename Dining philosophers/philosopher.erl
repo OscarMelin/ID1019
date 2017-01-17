@@ -29,8 +29,10 @@ eat(Hungry, Right, Left, Name, Ctrl) ->
 			eat(Remaining, Right, Left, Name, Ctrl);
 		{no, _} ->
 			chopstick:return(Left),
+			sleep(10, 20),
 			eat(Hungry, Right, Left, Name, Ctrl);
 		{_, no} ->
 			chopstick:return(Right),
+			sleep(10, 20),
 			eat(Hungry, Right, Left, Name, Ctrl)
 	end.
