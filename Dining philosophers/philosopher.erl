@@ -29,10 +29,12 @@ eat(Hungry, Right, Left, Name, Ctrl) ->
 			eat(Remaining, Right, Left, Name, Ctrl);
 		{no, _} ->
 			chopstick:return(Left),
+			io:fwrite("~s dropped left~n", [Name]),
 			sleep(10, 20),
 			eat(Hungry, Right, Left, Name, Ctrl);
 		{_, no} ->
 			chopstick:return(Right),
+			io:fwrite("~s dropped right~n", [Name]),
 			sleep(10, 20),
 			eat(Hungry, Right, Left, Name, Ctrl)
 	end.
