@@ -1,6 +1,5 @@
 -module(philosopher).
 -export([start/5]).
--import(erlang).
 
 sleep(T,D) ->
 	timer:sleep(T + random:uniform(D)).
@@ -19,8 +18,9 @@ eat(Hungry, Right, Left, Name, Ctrl) ->
 
 	%{L, R} = {chopstick:request(Left), chopstick:request(Right)},
 
+	sleep(100, 500),
 	Chopsticks = chopstick:request(Left, Right, 100),
-
+	
 	case Chopsticks of
 		ok ->
 			Remaining = Hungry - 1,
