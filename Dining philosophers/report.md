@@ -52,8 +52,9 @@ Now it works!
 
 ##4.2 asynchronous requests
 
-###If a philosopher gives up, how do we keep track of which chopsticks that
-was actually obtained?
+###If a philosopher gives up, how do we keep track of which chopsticks that was actually obtained?
+
+We can't, since we don't keep track of requests.
 
 ###Is this a tricky problem or a non-problem?
 
