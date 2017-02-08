@@ -1,6 +1,8 @@
 -module(brot).
 -export([mandelbrot/2]).
 
+% Calculate depth
+
 mandelbrot(C, M) ->
 	Z0 = cmplx:new(0, 0),
 	I = 0,
