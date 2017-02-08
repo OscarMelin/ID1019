@@ -1,4 +1,4 @@
--module(mandelbrot).
+-module(cmplx).
 -export([new/2, add/2, sqr/1, abs/1]).
 
 % Returns the complex number with real value X and imaginary Y.
@@ -19,4 +19,4 @@ sqr(A) ->
 % The absolute value of A.
 abs(A) ->
 	case A of {X, Y} ->
-		math:sqrt(A*A + B*B).
+		math:sqrt(A*A + Y*Y).
