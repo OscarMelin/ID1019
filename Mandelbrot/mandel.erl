@@ -1,5 +1,5 @@
--module(manel).
--export([mandelbrot/6]).
+-module(mandel).
+-export([demo/0]).
 
 mandelbrot(Width, Height, X, Y, K, Depth) ->
 	Trans = fun(W, H) ->
@@ -19,17 +19,17 @@ line(0, _, _, _, Line)->
 line(Width, Height, Trans, Depth, Line) ->
 	PixelDepth = brot:mandelbrot(Trans(Width, Height), Depth),
 	PixelColor = color:convert(PixelDepth, Depth),
-	line(Width - 1, Height, Trans, Depth, Line).
+	line(Width - 1, Height, Trans, Depth, [PixelColor | Line]).
 	
 
 demo() ->
-	small(-2.6,1.2,1.6).
+	small(-0.17,0.86,-0.125).
 
 small(X,Y,X1) ->
-	Width = 960,
-	Height = 540,
+	Width = 1280,
+	Height = 720,
 	K = (X1 - X)/Width,
-	Depth = 64,
+	Depth = 128,
 	T0 = now(),
 	Image = mandelbrot(Width, Height, X, Y, K, Depth),
 	T = timer:now_diff(now(), T0),
