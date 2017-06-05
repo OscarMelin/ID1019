@@ -6,19 +6,19 @@ Feel free to use me. Also star me if you found me useful, nothing I like more th
 
 5 labs for Programming II
 
-##Huffman coding
+## Huffman coding
 
-##Meta interpreter
+## Meta interpreter
 
-##Dining filisophers
+## Dining filisophers
 
-##Mandelbrot
+## Mandelbrot
 
-##Web server
+## Web server
 
 
 
-##NOTES:
+## NOTES:
 
 http://pages.cs.wisc.edu/~remzi/OSTEP/threads-bugs.pdf, use for lab3
 
