@@ -1,4 +1,4 @@
--module (dinner).
+-module (waiter).
 -export ([]).
 
 

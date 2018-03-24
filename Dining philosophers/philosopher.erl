@@ -16,15 +16,14 @@ eat(0, _, _, _, Ctrl) ->
 	Ctrl ! done;
 eat(Hungry, Right, Left, Name, Ctrl) ->
 
-	%{L, R} = {chopstick:request(Left), chopstick:request(Right)},
-
+	io:format("~s is dreaming!~n", [Name]),
 	sleep(100, 500),
 	Chopsticks = chopstick:request(Left, Right, 100),
-	
+
 	case Chopsticks of
 		ok ->
 			Remaining = Hungry - 1,
-			io:format("~s received two chopsticks~n", [Name]),
+			io:format("~s is eating!~n", [Name]),
 			sleep(100, 500),
 			chopstick:return(Left),
 			chopstick:return(Right),
